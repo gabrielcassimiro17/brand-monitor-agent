@@ -12,7 +12,7 @@ Brand Monitor Agent is an agent-based system built with Google ADK to analyze a 
 
 ### 1. Clone the repository
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/gabrielcassimiro17/brand-monitor-agent.git
 cd brand-monitor-agent/brand-monitor
 ```
 
