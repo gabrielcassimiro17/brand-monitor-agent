@@ -1,6 +1,10 @@
 import datetime
 from typing import Any, Dict, List
 
+from fastapi import FastAPI, Query
+from fastapi_mcp import FastApiMCP
+from .schemas import TwitterPost, TwitterPostsResponse
+
 MOCK_GOOGLE_POSTS: List[Dict[str, Any]] = [
     {
         "id": "tweet_123",
@@ -29,27 +33,26 @@ MOCK_GOOGLE_POSTS: List[Dict[str, Any]] = [
 ]
 
 
-def get_twitter_posts(company_name: str) -> dict:
-    """Returns posts for the company name
+app = FastAPI()
+
+
+@app.get("/twitter", operation_id="get_twitter_posts", response_model=TwitterPostsResponse)
+async def get_twitter_posts(company_name: str = Query(..., description="Company name to search tweets for")):
+    """
+    Endpoint to retrieve Twitter posts for a specified company.
 
     Args:
-        company_name (str): The name of the company to search posts on social media
+        company_name (str): The name of the company to search tweets for (as a query parameter).
 
     Returns:
-        dict: status and result or error msg.
+        dict: Dictionary containing a list of Twitter posts for the company.
     """
+    return {"twitter_posts": MOCK_GOOGLE_POSTS}
 
-    if company_name.lower() == "google":
-         report = (
-            f'The posts for {company_name}: {MOCK_GOOGLE_POSTS}'
-        )
-
-    else:
-        return {
-            "status": "error",
-            "error_message": (
-                f"Sorry, I don't have timezone information for {company_name}."
-            ),
-        }
-
-    return {"status": "success", "report": report}
+mcp = FastApiMCP(
+    app,
+    name="Get the company Posts",
+    description="Returns social media posts of the given company",
+    base_url="http://127.0.0.1:7000",
+)
+mcp.mount()
