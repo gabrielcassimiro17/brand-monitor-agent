@@ -1,18 +1,23 @@
-from google.adk.agents import Agent
-from .tools import get_posts
+from google.adk.agents import ParallelAgent, SequentialAgent
+from .agents.twitter_agent import twitter_agent
+from .agents.reddit_agent import reddit_agent
+from .agents.news_agent import news_agent
+from .agents.compile_agent import compile_agent
 
-root_agent = Agent(
-    name="brand_monitor_agent",
-    model="gemini-2.0-flash",
-    description=(
-        "Agent that analyses the brand posts on social media (Twitter, Reddit) and news articles."
-    ),
-    instruction=(
-        "You are a helpful agent that analyses posts and news articles for a given company and returns a report on that company. "
-        "Start by asking questions about what company the user wants information. "
-        "Then create the report based on the posts and articles you find. "
-        "You can fetch posts from Twitter, Reddit, or news articles individually. "
-        "Ask the user which sources they want to include."
-    ),
-    tools=[get_posts],
+# Fan-out to run each analysis in parallel
+parallel_fetch = ParallelAgent(
+    name="FetchParallel",
+    sub_agents=[twitter_agent, reddit_agent, news_agent],
 )
+
+# Orchestrator
+brand_monitor_workflow = SequentialAgent(
+    name="BrandMonitorWorkflow",
+    sub_agents=[
+        parallel_fetch,
+        compile_agent,
+    ],
+)
+
+# Root agent reference for the runner
+root_agent = brand_monitor_workflow
