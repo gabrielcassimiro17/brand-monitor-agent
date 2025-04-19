@@ -3,8 +3,14 @@
 Returns:
     dict: Dictionary containing lists of posts/articles for each source.
 """
-from .repositories import get_mock_twitter_posts, get_mock_reddit_posts, get_mock_news_articles
+
+from .repositories import (
+    get_mock_twitter_posts,
+    get_mock_reddit_posts,
+    get_mock_news_articles,
+)
 from typing import Dict, Any
+
 
 def fetch_twitter_posts(company_name: str) -> Dict[str, Any]:
     """Fetch Twitter posts for a specified company.
@@ -17,6 +23,7 @@ def fetch_twitter_posts(company_name: str) -> Dict[str, Any]:
     """
     return {"twitter_posts": get_mock_twitter_posts(company_name)}
 
+
 def fetch_reddit_posts(company_name: str) -> Dict[str, Any]:
     """Fetch Reddit posts for a specified company.
 
@@ -27,6 +34,7 @@ def fetch_reddit_posts(company_name: str) -> Dict[str, Any]:
         Dict[str, Any]: Dictionary with key 'reddit_posts' and list of posts as value.
     """
     return {"reddit_posts": get_mock_reddit_posts(company_name)}
+
 
 def fetch_news_articles(company_name: str) -> Dict[str, Any]:
     """Fetch news articles for a specified company.

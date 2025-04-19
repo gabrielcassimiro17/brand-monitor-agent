@@ -3,8 +3,10 @@
 Returns:
     LlmAgent: Agent that analyzes recent Reddit discussions for the target company.
 """
+
 from google.adk.agents import LlmAgent
 from ..tools import get_posts
+
 
 def create_reddit_agent() -> LlmAgent:
     """Creates an agent to analyze recent Reddit discussions for the target company.
@@ -26,5 +28,6 @@ def create_reddit_agent() -> LlmAgent:
         tools=[get_posts],
         output_key="reddit_report",
     )
+
 
 reddit_agent = create_reddit_agent()

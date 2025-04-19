@@ -1,5 +1,6 @@
 from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, SseServerParams
 
+
 # Update MCPToolset to use the correct /mcp endpoint as per fastapi_mcp documentation
 async def get_posts(company_name: str, source: str, **kwargs) -> str:
     """
@@ -13,8 +14,16 @@ async def get_posts(company_name: str, source: str, **kwargs) -> str:
         str: The result of the tool execution as a string.
     """
     tx = kwargs.get("tx")
-    tools, exit_stack = await MCPToolset.from_server(connection_params=SseServerParams(url='http://127.0.0.1:7000/mcp'))
+    tools, exit_stack = await MCPToolset.from_server(
+        connection_params=SseServerParams(url="http://127.0.0.1:7000/mcp")
+    )
     async with exit_stack:
         # Find the tool by name
-        tool = next(t for t in tools if t.name == f'get_{source}_posts' or t.name == f'get_{source}_articles')
-        return await tool.run_async(args={"company_name": company_name}, tool_context=tx)
+        tool = next(
+            t
+            for t in tools
+            if t.name == f"get_{source}_posts" or t.name == f"get_{source}_articles"
+        )
+        return await tool.run_async(
+            args={"company_name": company_name}, tool_context=tx
+        )

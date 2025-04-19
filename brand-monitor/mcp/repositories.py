@@ -3,8 +3,10 @@
 Returns:
     list[dict]: List of post/article dictionaries for each source.
 """
+
 from typing import List, Dict, Any
 import datetime
+
 
 def get_mock_twitter_posts(company_name: str) -> List[Dict[str, Any]]:
     """Fetch mock Twitter posts for a company.
@@ -22,7 +24,7 @@ def get_mock_twitter_posts(company_name: str) -> List[Dict[str, Any]]:
             "author": "TechEnthusiast",
             "timestamp": datetime.datetime.now().isoformat(),
             "source": "twitter",
-            "company_query": company_name
+            "company_query": company_name,
         },
         {
             "id": "tweet_456",
@@ -30,7 +32,7 @@ def get_mock_twitter_posts(company_name: str) -> List[Dict[str, Any]]:
             "author": "SEOGuru",
             "timestamp": datetime.datetime.now().isoformat(),
             "source": "twitter",
-            "company_query": company_name
+            "company_query": company_name,
         },
         {
             "id": "tweet_789",
@@ -38,9 +40,10 @@ def get_mock_twitter_posts(company_name: str) -> List[Dict[str, Any]]:
             "author": "RemoteWorker",
             "timestamp": datetime.datetime.now().isoformat(),
             "source": "twitter",
-            "company_query": company_name
-        }
+            "company_query": company_name,
+        },
     ]
+
 
 def get_mock_reddit_posts(company_name: str) -> List[Dict[str, Any]]:
     """Fetch mock Reddit posts for a company.
@@ -58,7 +61,7 @@ def get_mock_reddit_posts(company_name: str) -> List[Dict[str, Any]]:
             "author": "RedditTechie",
             "timestamp": datetime.datetime.now().isoformat(),
             "source": "reddit",
-            "company_query": company_name
+            "company_query": company_name,
         },
         {
             "id": "reddit_102",
@@ -66,7 +69,7 @@ def get_mock_reddit_posts(company_name: str) -> List[Dict[str, Any]]:
             "author": "AskMeAnything",
             "timestamp": datetime.datetime.now().isoformat(),
             "source": "reddit",
-            "company_query": company_name
+            "company_query": company_name,
         },
         {
             "id": "reddit_103",
@@ -74,9 +77,10 @@ def get_mock_reddit_posts(company_name: str) -> List[Dict[str, Any]]:
             "author": "PixelFan",
             "timestamp": datetime.datetime.now().isoformat(),
             "source": "reddit",
-            "company_query": company_name
-        }
+            "company_query": company_name,
+        },
     ]
+
 
 def get_mock_news_articles(company_name: str) -> List[Dict[str, Any]]:
     """Fetch mock news articles for a company.
@@ -94,7 +98,7 @@ def get_mock_news_articles(company_name: str) -> List[Dict[str, Any]]:
             "author": "TechNewsDaily",
             "timestamp": datetime.datetime.now().isoformat(),
             "source": "news",
-            "company_query": company_name
+            "company_query": company_name,
         },
         {
             "id": "news_202",
@@ -102,7 +106,7 @@ def get_mock_news_articles(company_name: str) -> List[Dict[str, Any]]:
             "author": "MarketWatch",
             "timestamp": datetime.datetime.now().isoformat(),
             "source": "news",
-            "company_query": company_name
+            "company_query": company_name,
         },
         {
             "id": "news_203",
@@ -110,6 +114,6 @@ def get_mock_news_articles(company_name: str) -> List[Dict[str, Any]]:
             "author": "Forbes",
             "timestamp": datetime.datetime.now().isoformat(),
             "source": "news",
-            "company_query": company_name
-        }
+            "company_query": company_name,
+        },
     ]

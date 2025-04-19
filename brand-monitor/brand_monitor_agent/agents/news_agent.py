@@ -3,8 +3,10 @@
 Returns:
     LlmAgent: Agent that analyzes recent news articles for the target company.
 """
+
 from google.adk.agents import LlmAgent
 from ..tools import get_posts
+
 
 def create_news_agent() -> LlmAgent:
     """Creates an agent to analyze recent news articles for the target company.
@@ -26,5 +28,6 @@ def create_news_agent() -> LlmAgent:
         tools=[get_posts],
         output_key="news_report",
     )
+
 
 news_agent = create_news_agent()

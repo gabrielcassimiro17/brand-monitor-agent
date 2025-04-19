@@ -3,8 +3,10 @@
 Returns:
     LlmAgent: Agent that analyzes recent tweets for the target company.
 """
+
 from google.adk.agents import LlmAgent
 from ..tools import get_posts
+
 
 def create_twitter_agent() -> LlmAgent:
     """Creates an agent to analyze recent tweets for the target company.
@@ -26,5 +28,6 @@ def create_twitter_agent() -> LlmAgent:
         tools=[get_posts],
         output_key="twitter_report",
     )
+
 
 twitter_agent = create_twitter_agent()

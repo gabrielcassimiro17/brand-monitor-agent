@@ -3,8 +3,10 @@
 Returns:
     TwitterPostsResponse, RedditPostsResponse, NewsArticlesResponse: Response models for each endpoint.
 """
+
 from pydantic import BaseModel
 from typing import List
+
 
 class TwitterPost(BaseModel):
     """Schema for a single Twitter post.
@@ -12,12 +14,14 @@ class TwitterPost(BaseModel):
     Returns:
         TwitterPost: Twitter post object.
     """
+
     id: str
     text: str
     author: str
     timestamp: str
     source: str
     company_query: str
+
 
 class RedditPost(BaseModel):
     """Schema for a single Reddit post.
@@ -25,12 +29,14 @@ class RedditPost(BaseModel):
     Returns:
         RedditPost: Reddit post object.
     """
+
     id: str
     text: str
     author: str
     timestamp: str
     source: str
     company_query: str
+
 
 class NewsArticle(BaseModel):
     """Schema for a single news article.
@@ -38,6 +44,7 @@ class NewsArticle(BaseModel):
     Returns:
         NewsArticle: News article object.
     """
+
     id: str
     text: str
     author: str
@@ -45,13 +52,16 @@ class NewsArticle(BaseModel):
     source: str
     company_query: str
 
+
 class TwitterPostsResponse(BaseModel):
     """Response model for Twitter posts endpoint.
 
     Returns:
         TwitterPostsResponse: Response containing a list of Twitter posts.
     """
+
     twitter_posts: List[TwitterPost]
+
 
 class RedditPostsResponse(BaseModel):
     """Response model for Reddit posts endpoint.
@@ -59,7 +69,9 @@ class RedditPostsResponse(BaseModel):
     Returns:
         RedditPostsResponse: Response containing a list of Reddit posts.
     """
+
     reddit_posts: List[RedditPost]
+
 
 class NewsArticlesResponse(BaseModel):
     """Response model for News articles endpoint.
@@ -67,4 +79,5 @@ class NewsArticlesResponse(BaseModel):
     Returns:
         NewsArticlesResponse: Response containing a list of news articles.
     """
+
     news_articles: List[NewsArticle]
