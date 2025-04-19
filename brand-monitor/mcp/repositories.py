@@ -1,9 +1,20 @@
+"""Repositories for fetching mock posts from various sources.
+
+Returns:
+    list[dict]: List of post/article dictionaries for each source.
+"""
 from typing import List, Dict, Any
 import datetime
 
-# Mock repositories for each source
-
 def get_mock_twitter_posts(company_name: str) -> List[Dict[str, Any]]:
+    """Fetch mock Twitter posts for a company.
+
+    Args:
+        company_name (str): The company name to search tweets for.
+
+    Returns:
+        List[Dict[str, Any]]: List of mock Twitter post dictionaries.
+    """
     return [
         {
             "id": "tweet_123",
@@ -32,6 +43,14 @@ def get_mock_twitter_posts(company_name: str) -> List[Dict[str, Any]]:
     ]
 
 def get_mock_reddit_posts(company_name: str) -> List[Dict[str, Any]]:
+    """Fetch mock Reddit posts for a company.
+
+    Args:
+        company_name (str): The company name to search Reddit posts for.
+
+    Returns:
+        List[Dict[str, Any]]: List of mock Reddit post dictionaries.
+    """
     return [
         {
             "id": "reddit_101",
@@ -60,6 +79,14 @@ def get_mock_reddit_posts(company_name: str) -> List[Dict[str, Any]]:
     ]
 
 def get_mock_news_articles(company_name: str) -> List[Dict[str, Any]]:
+    """Fetch mock news articles for a company.
+
+    Args:
+        company_name (str): The company name to search news articles for.
+
+    Returns:
+        List[Dict[str, Any]]: List of mock news article dictionaries.
+    """
     return [
         {
             "id": "news_201",
