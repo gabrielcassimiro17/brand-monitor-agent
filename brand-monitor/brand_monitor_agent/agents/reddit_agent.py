@@ -23,7 +23,7 @@ def create_reddit_agent() -> LlmAgent:
         description="Analyze recent Reddit discussions for the target company.",
         instruction=(
             "Use the get_posts tool with source='reddit' and company=state['company'] to fetch the top 5 posts. "
-            "Then write a concise report summarizing the primary discussion topics, community sentiment, and notable user insights."
+            "Then write a concise report highlighting the main themes, sentiment, and any notable discussions."
         ),
         tools=[get_posts],
         output_key="reddit_report",

@@ -64,3 +64,9 @@ async def get_news_articles(
         dict: Dictionary containing a list of news articles for the company.
     """
     return fetch_news_articles(company_name)
+
+
+@router.get("/health", tags=["Health"])
+async def health_check():
+    """Health check endpoint for basic uptime monitoring."""
+    return {"status": "ok"}

@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+praw
+python-dotenv
+pydantic
+fastapi-mcp
