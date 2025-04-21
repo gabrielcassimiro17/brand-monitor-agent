@@ -8,7 +8,7 @@ app.include_router(router)
 mcp = FastApiMCP(
     app,
     name="Get the company Posts",
-    description="Returns social media posts and news articles of the given company",
-    base_url="http://127.0.0.1:7000",
+    description="Returns social media posts and news articles of the given company"
+    # Removed base_url argument as it is not supported
 )
 mcp.mount()
