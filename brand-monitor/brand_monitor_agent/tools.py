@@ -15,7 +15,7 @@ async def get_posts(company_name: str, source: str, **kwargs) -> str:
     """
     tx = kwargs.get("tx")
     tools, exit_stack = await MCPToolset.from_server(
-        connection_params=SseServerParams(url="http://127.0.0.1:7000/mcp")
+        connection_params=SseServerParams(url="http://127.0.0.1:7001/mcp")
     )
     async with exit_stack:
         # Find the tool by name

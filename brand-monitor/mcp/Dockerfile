@@ -9,6 +9,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src /app/src
 
-EXPOSE 7000
+EXPOSE 7001
 
-CMD ["uvicorn", "src.api:app", "--host", "0.0.0.0", "--port", "7000"]
+CMD ["uvicorn", "src.api:app", "--host", "0.0.0.0", "--port", "7001"]

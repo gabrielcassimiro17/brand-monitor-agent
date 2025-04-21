@@ -2,10 +2,28 @@
 
 Brand Monitor Agent is an agent-based system built with Google ADK to analyze a company's brand presence across social media (Twitter, Reddit) and news articles. The agent uses a Model Context Protocol (MCP) server, implemented with FastAPI, as a set of tools to fetch, process, and synthesize brand-related data. The MCP server exposes endpoints for retrieving mock data, which the agent leverages to generate comprehensive brand reports.
 
+This project is under development. For now you can run it locally.
+
+## Architecture
+
+### MCP Server
+
+The MCP server is a FastAPI application using the MCP protocol that provides REST API endpoints for fetching mock data from Twitter, Reddit, and news articles. This service is deployed on cloud run.
+
+### Agent
+
+The agent is a Google ADK-based system that uses the MCP server as a set of tools to fetch, process, and synthesize brand-related data. This service is deployed on cloud run using de ADK SDK.
+
+### Front End
+
+The front end is a web interface that allows users to interact with the agent and generate brand reports.
+
+The front end will be build with firebase studio.
+
+
 ## Features
 - **Agent Orchestration**: Uses Google ADK to run a multi-step workflow that fetches and analyzes content from all sources and compiles a brand report.
 - **MCP Server (FastAPI)**: Provides REST API endpoints (`/twitter`, `/reddit`, `/news`) that serve as tools for the agent, returning data for a given company.
-- **Modular Codebase**: Clean separation of routers, services, repositories, schemas, and agent logic.
 
 ---
 
@@ -13,7 +31,7 @@ Brand Monitor Agent is an agent-based system built with Google ADK to analyze a 
 
 ### 1. Clone the repository
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/gabrielcassimiro17/brand-monitor-agent.git
 cd brand-monitor-agent/brand-monitor
 ```
 
@@ -24,6 +42,8 @@ Create a `.env` file at the root of the `brand-monitor` directory. The most impo
 echo "GOOGLE_API_KEY=your-google-api-key" > .env
 echo "GOOGLE_GENAI_USE_VERTEXAI=FALSE" >> .env
 ```
+
+See `.env.example` for required environment variables.
 
 Or copy and edit the provided example:
 ```bash
@@ -40,15 +60,34 @@ REDDIT_USER_AGENT=brand-monitor-agent
 
 ---
 
-## Running the MCP Server
+## Local Development Setup
 
-Start the FastAPI MCP server on port 7000:
+Before running the MCP server, set up your Python environment:
 
 ```bash
-uvicorn brand-monitor.mcp.mcp_server:app --port 7000
+# Create and activate a virtual environment (recommended)
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install dependencies
+pip install -r mcp/requirements.txt
 ```
 
-The MCP endpoints will be available at [http://127.0.0.1:7000](http://127.0.0.1:7000).
+---
+
+## Running the MCP Server (Docker)
+
+Start the FastAPI MCP server using Docker:
+
+```bash
+cd mcp
+# Build the Docker image
+docker build -t mcp-server .
+# Run the Docker container
+docker run --env-file ../.env -p 7001:7001 mcp-server
+```
+
+The MCP endpoints will be available at [http://127.0.0.1:7001](http://127.0.0.1:7001).
 
 ---
 
@@ -61,20 +100,6 @@ adk web
 ```
 
 This will open a browser window where you can interact with the Brand Monitor Agent, select a company, and generate a brand report.
-
----
-
-## Python Dependencies
-Make sure you have all dependencies installed, including [PRAW](https://praw.readthedocs.io/en/stable/):
-```bash
-pip install praw fastapi uvicorn
-```
-
----
-
-## .env Example
-See `.env.example` for required environment variables.
-
 ---
 
 ## Project Structure
