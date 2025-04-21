@@ -5,7 +5,17 @@ Returns:
 """
 
 from typing import List, Dict, Any
-import datetime
+import os
+import praw
+from datetime import datetime
+from dotenv import load_dotenv, find_dotenv
+
+
+load_dotenv(find_dotenv())
+
+REDDIT_CLIENT_ID = os.getenv("REDDIT_CLIENT_ID")
+REDDIT_CLIENT_SECRET = os.getenv("REDDIT_CLIENT_SECRET")
+REDDIT_USER_AGENT = os.getenv("REDDIT_USER_AGENT", "brand-monitor-agent")
 
 
 def get_mock_twitter_posts(company_name: str) -> List[Dict[str, Any]]:
@@ -45,41 +55,31 @@ def get_mock_twitter_posts(company_name: str) -> List[Dict[str, Any]]:
     ]
 
 
-def get_mock_reddit_posts(company_name: str) -> List[Dict[str, Any]]:
-    """Fetch mock Reddit posts for a company.
+def get_reddit_posts(company_name: str) -> List[Dict[str, Any]]:
+    """Fetch real Reddit posts for a company using PRAW.
 
     Args:
         company_name (str): The company name to search Reddit posts for.
 
     Returns:
-        List[Dict[str, Any]]: List of mock Reddit post dictionaries.
+        List[Dict[str, Any]]: List of Reddit post dictionaries.
     """
-    return [
-        {
-            "id": "reddit_101",
-            "text": "Redditors discuss Google's latest AI advancements in r/technology.",
-            "author": "RedditTechie",
-            "timestamp": datetime.datetime.now().isoformat(),
+    reddit = praw.Reddit(
+        client_id=REDDIT_CLIENT_ID,
+        client_secret=REDDIT_CLIENT_SECRET,
+        user_agent=REDDIT_USER_AGENT
+    )
+    posts = []
+    for submission in reddit.subreddit('all').search(company_name, sort='new', limit=10):
+        posts.append({
+            "id": submission.id,
+            "text": submission.title,
+            "author": str(submission.author) if submission.author else None,
+            "timestamp": datetime.utcfromtimestamp(submission.created_utc).isoformat(),
             "source": "reddit",
             "company_query": company_name,
-        },
-        {
-            "id": "reddit_102",
-            "text": "AMA with a Google engineer happening now in r/IAmA!",
-            "author": "AskMeAnything",
-            "timestamp": datetime.datetime.now().isoformat(),
-            "source": "reddit",
-            "company_query": company_name,
-        },
-        {
-            "id": "reddit_103",
-            "text": "Reddit users share their experience with Google Pixel devices.",
-            "author": "PixelFan",
-            "timestamp": datetime.datetime.now().isoformat(),
-            "source": "reddit",
-            "company_query": company_name,
-        },
-    ]
+        })
+    return posts
 
 
 def get_mock_news_articles(company_name: str) -> List[Dict[str, Any]]:

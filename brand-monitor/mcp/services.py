@@ -6,7 +6,7 @@ Returns:
 
 from .repositories import (
     get_mock_twitter_posts,
-    get_mock_reddit_posts,
+    get_reddit_posts,  # Now using real Reddit connection
     get_mock_news_articles,
 )
 from typing import Dict, Any
@@ -25,7 +25,7 @@ def fetch_twitter_posts(company_name: str) -> Dict[str, Any]:
 
 
 def fetch_reddit_posts(company_name: str) -> Dict[str, Any]:
-    """Fetch Reddit posts for a specified company.
+    """Fetch Reddit posts for a specified company (real Reddit API).
 
     Args:
         company_name (str): The company name to search Reddit posts for.
@@ -33,7 +33,7 @@ def fetch_reddit_posts(company_name: str) -> Dict[str, Any]:
     Returns:
         Dict[str, Any]: Dictionary with key 'reddit_posts' and list of posts as value.
     """
-    return {"reddit_posts": get_mock_reddit_posts(company_name)}
+    return {"reddit_posts": get_reddit_posts(company_name)}
 
 
 def fetch_news_articles(company_name: str) -> Dict[str, Any]:

@@ -5,7 +5,7 @@ Returns:
 """
 
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
 
 class TwitterPost(BaseModel):
@@ -32,7 +32,7 @@ class RedditPost(BaseModel):
 
     id: str
     text: str
-    author: str
+    author: Optional[str]
     timestamp: str
     source: str
     company_query: str
