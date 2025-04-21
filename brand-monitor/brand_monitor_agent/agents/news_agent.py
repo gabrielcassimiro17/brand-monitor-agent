@@ -23,7 +23,7 @@ def create_news_agent() -> LlmAgent:
         description="Analyze recent news articles for the target company.",
         instruction=(
             "Use the get_posts tool with source='news' and company=state['company'] to fetch the 5 latest articles. "
-            "Then write a concise report summarizing the headlines, overall tone, and any emerging news trends or key developments."
+            "Then write a concise report highlighting the main themes and sentiment in the news coverage."
         ),
         tools=[get_posts],
         output_key="news_report",

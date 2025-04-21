@@ -6,7 +6,6 @@ Returns:
 
 from google.adk.agents import LlmAgent
 
-
 def create_compile_agent() -> LlmAgent:
     """Creates an agent to compile all source-specific analyses into a brand report.
 
